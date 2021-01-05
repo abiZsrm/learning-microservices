@@ -1,0 +1,13 @@
+# Sub-directories to ignore. 
+/.metadata/
+/social-multiplication/.gradle/
+/social-multiplication/.settings/
+/social-multiplication/bin/
+/social-multiplication/gradle/
+
+# Files to ignore. 
+/social-multiplication/.classpath
+/social-multiplication/.project
+//social-multiplication/gradlew
+/social-multiplication/gradlew.bat
+
