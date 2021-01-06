@@ -1,10 +1,10 @@
 package microservices.book.multiplication.domain;
 
-public final class User
+public final class User 
 {
    private final String m_alias; 
    
-   protected User() 
+   public User() 
    {
       this.m_alias = null;
    }
@@ -12,5 +12,10 @@ public final class User
    public User(String alias)
    {
       this.m_alias = alias; 
+   }
+   
+   public String getAlias()
+   {
+      return this.m_alias; 
    }
 }

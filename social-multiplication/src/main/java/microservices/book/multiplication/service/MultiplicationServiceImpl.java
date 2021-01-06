@@ -29,8 +29,8 @@ public class MultiplicationServiceImpl implements MultiplicationService
    public boolean checkAttempt(MultiplicationResultAttempt resultAttempt)
    {
       return resultAttempt.getResultAttempt() ==
-               resultAttempt.getMultiplication().getOperand1() *
-               resultAttempt.getMultiplication().getOperand2();
+               (resultAttempt.getMultiplication().getOperand1() *
+               resultAttempt.getMultiplication().getOperand2());
    }
 
 }

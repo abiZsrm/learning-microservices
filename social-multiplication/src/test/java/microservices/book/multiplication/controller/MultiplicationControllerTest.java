@@ -1,4 +1,4 @@
-package microservices.book.multiplication;
+package microservices.book.multiplication.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
+import microservices.book.multiplication.controller.MultiplicationController;
 import microservices.book.multiplication.domain.Multiplication;
-import microservices.book.multiplication.service.MultiplicationController;
 import microservices.book.multiplication.service.MultiplicationService;
 
 import static org.assertj.core.api.Assertions.assertThat;
