@@ -1,5 +1,8 @@
 package lmsb.multiplication.service.impl;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
@@ -46,7 +49,7 @@ public class MultiplicationServiceImpl implements MultiplicationService
       
       MultiplicationResultAttempt checkedAttempt = new MultiplicationResultAttempt
                                                    (resultAttempt.getUser(), resultAttempt.getMultiplication(), 
-                                                    resultAttempt.getResultAttempt(), correct); 
+                                                    resultAttempt.getResultAttempt(), correct, MultiplicationRepoServiceImpl.mulID); 
       //1. check for the user when creating the multiplicationresultattempt object. 
       //2. store the multiplicationresultattempt into the database. 
       m_raRepo.saveMultiplicationResultAttempt(checkedAttempt);
@@ -54,4 +57,7 @@ public class MultiplicationServiceImpl implements MultiplicationService
       return correct; 
    }
 
+   public List<MultiplicationResultAttempt> getStatsForUser(String userAlias) throws SQLException {
+      return m_raRepo.findTop5ByUserAliasOrderByIdDesc(userAlias);
+  }
 }

@@ -8,14 +8,15 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import lmsb.multiplication.domain.User;
-import lmsb.multiplication.repo.UserRepository;
+import lmsb.multiplication.repo.UserRepo;
 
 @Repository
-public class UserRepoServiceImpl implements UserRepository
+public class UserRepoServiceImpl implements UserRepo
 {
    public static int m_userID; 
    
@@ -32,7 +33,21 @@ public class UserRepoServiceImpl implements UserRepository
    
    public Optional<User> findByAlias(String alias)
    {
-      return null;
+      String retrievalQuery = "SELECT USER_ID FROM SOC_MUL_USER WHERE ALIAS = '" + alias + "'"; 
+      Integer result = null; 
+      User user = null;
+      
+      try
+      {
+         result = m_jdbcTemplate.getJdbcOperations().queryForObject(retrievalQuery, Integer.class);
+         user = new User(alias, result);
+      }
+      catch(EmptyResultDataAccessException ede)
+      {
+         user = null;
+      }
+
+       return Optional.ofNullable(user); 
    }
 
    public void saveUser(User user)
@@ -51,8 +66,9 @@ public class UserRepoServiceImpl implements UserRepository
    
    public User findByID(int userID)
    {
-      String retrieveUserQuery = "SELECT * FROM USER WHERE USER_ID = ?"; 
-      return m_jdbcTemplate.getJdbcOperations().query(retrieveUserQuery, this::mapRowUser, userID);
+      String retrieveUserQuery = "SELECT * FROM SOC_MUL_USER WHERE USER_ID = '" + userID + "'";  
+      System.out.println("Query: " + retrieveUserQuery);
+      return m_jdbcTemplate.getJdbcTemplate().queryForObject(retrieveUserQuery, this::mapRowUser); 
    }
    
    private void updateID(int userID)
@@ -61,7 +77,7 @@ public class UserRepoServiceImpl implements UserRepository
       m_jdbcTemplate.getJdbcOperations().update(updateQuery, Integer.toString(userID)); 
    }
 
-   private User mapRowUser(ResultSet rs) throws SQLException
+   private User mapRowUser(ResultSet rs, int rowNum) throws SQLException
    {
       User user = null;
       String alias = rs.getString("ALIAS");

@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import lmsb.multiplication.domain.User;
 
-public interface UserRepository
+public interface UserRepo
 {
    public Optional<User> findByAlias(final String alias);
    

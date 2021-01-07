@@ -7,7 +7,7 @@ import lmsb.multiplication.service.impl.MultiplicationServiceImpl;
 import lmsb.multiplication.service.impl.RandomGeneratorServiceImpl;
 
 @Configuration
-public class Setup
+public class StartUpConfiguration
 {
    @Bean
    public MultiplicationServiceImpl mulService()
