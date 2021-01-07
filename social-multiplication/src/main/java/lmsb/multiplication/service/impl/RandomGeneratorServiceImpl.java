@@ -1,6 +1,8 @@
-package microservices.book.multiplication.service;
+package lmsb.multiplication.service.impl;
 
 import java.util.Random;
+
+import lmsb.multiplication.service.RandomGeneratorService;
 
 public class RandomGeneratorServiceImpl implements RandomGeneratorService
 {

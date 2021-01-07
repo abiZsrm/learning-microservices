@@ -11,14 +11,15 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
-import microservices.book.multiplication.controller.MultiplicationController;
-import microservices.book.multiplication.domain.Multiplication;
-import microservices.book.multiplication.service.MultiplicationService;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lmsb.multiplication.controller.MultiplicationController;
+import lmsb.multiplication.domain.Multiplication;
+import lmsb.multiplication.repo.impl.MultiplicationRepoServiceImpl;
+import lmsb.multiplication.service.MultiplicationService;
 
 @WebMvcTest(MultiplicationController.class)
 public class MultiplicationControllerTest
@@ -44,7 +45,7 @@ public class MultiplicationControllerTest
    {
       // Given
       given(multiplicationService.createRandomMultiplication())
-                                 .willReturn(new Multiplication(70, 20));
+                                 .willReturn(new Multiplication(70, 20, MultiplicationRepoServiceImpl.mulID));
    
       // When
       MockHttpServletResponse response = mvc.perform(get("/multiplications/random")
@@ -53,6 +54,6 @@ public class MultiplicationControllerTest
       
       // Then
       assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-      assertThat(response.getContentAsString()).isEqualTo(json.write(new Multiplication(70, 20)).getJson());
+      assertThat(response.getContentAsString()).isEqualTo(json.write(new Multiplication(70, 20, MultiplicationRepoServiceImpl.mulID)).getJson());
    }
 }

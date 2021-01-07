@@ -26,7 +26,7 @@ $(document).ready(function() {
         var $form = $( this ),
             attempt = $form.find( "input[name='result-attempt']" ).val(),
             userAlias = $form.find( "input[name='user-alias']" ).val();
-
+          console.log("User: " + userAlias); 
         // Compose the data in the format that the API is expecting
         var data = { user: { alias: userAlias}, multiplication: {operand1: a, operand2: b}, resultAttempt: attempt};
 
@@ -37,6 +37,7 @@ $(document).ready(function() {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
+            async: false, 
             success: function(result){
                 if(result.correct) {
                     $('.result-message').empty().append("The result is correct! Congratulations!");

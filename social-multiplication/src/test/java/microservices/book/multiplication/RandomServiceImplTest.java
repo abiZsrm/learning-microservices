@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import microservices.book.multiplication.service.RandomGeneratorServiceImpl;
+import lmsb.multiplication.service.impl.RandomGeneratorServiceImpl;
 
 public class RandomServiceImplTest
 {

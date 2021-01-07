@@ -18,11 +18,13 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import microservices.book.multiplication.controller.MultiplicationResultAttemptController.ResultResponse;
-import microservices.book.multiplication.domain.Multiplication;
-import microservices.book.multiplication.domain.MultiplicationResultAttempt;
-import microservices.book.multiplication.domain.User;
-import microservices.book.multiplication.service.MultiplicationService;
+import lmsb.multiplication.controller.MultiplicationResultAttemptController;
+import lmsb.multiplication.domain.Multiplication;
+import lmsb.multiplication.domain.MultiplicationResultAttempt;
+import lmsb.multiplication.domain.User;
+import lmsb.multiplication.repo.impl.MultiplicationRepoServiceImpl;
+import lmsb.multiplication.repo.impl.UserRepoServiceImpl;
+import lmsb.multiplication.service.MultiplicationService;
 
 @WebMvcTest(MultiplicationResultAttemptController.class)
 public class MultiplicationResultAttemptControllerTest
@@ -36,7 +38,7 @@ public class MultiplicationResultAttemptControllerTest
    // This object will be magically initialized by the
    // initFields method below.
    private JacksonTester<MultiplicationResultAttempt> jsonResult;
-   private JacksonTester<ResultResponse> jsonResponse;
+   private JacksonTester<MultiplicationResultAttempt> jsonResponse;
    
    @BeforeEach
    public void setup()
@@ -65,9 +67,9 @@ public class MultiplicationResultAttemptControllerTest
       // itself)
       given(multiplicationService.checkAttempt(any(MultiplicationResultAttempt.class)))
                                  .willReturn(correct);
-      User user = new User("john");
-      Multiplication multiplication = new Multiplication(50, 70);
-      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3500);
+      User user = new User("john", UserRepoServiceImpl.m_userID);
+      Multiplication multiplication = new Multiplication(50, 70, MultiplicationRepoServiceImpl.mulID);
+      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3500, false);
       
       // when
       MockHttpServletResponse response = mvc.perform(post("/results").contentType(MediaType.APPLICATION_JSON)
@@ -77,6 +79,9 @@ public class MultiplicationResultAttemptControllerTest
       // then
       assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
       assertThat(response.getContentAsString()).isEqualTo(
-      jsonResponse.write(new ResultResponse(correct)).getJson());
+      jsonResponse.write(new MultiplicationResultAttempt(attempt.getUser(),
+               attempt.getMultiplication(),
+               attempt.getResultAttempt(),
+               correct)).getJson());
     }
 }

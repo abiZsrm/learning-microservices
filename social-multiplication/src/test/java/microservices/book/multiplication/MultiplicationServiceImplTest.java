@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import microservices.book.multiplication.domain.Multiplication;
-import microservices.book.multiplication.domain.MultiplicationResultAttempt;
-import microservices.book.multiplication.domain.User;
-import microservices.book.multiplication.service.MultiplicationService;
-import microservices.book.multiplication.service.MultiplicationServiceImpl;
-import microservices.book.multiplication.service.RandomGeneratorService;
+import lmsb.multiplication.domain.Multiplication;
+import lmsb.multiplication.domain.MultiplicationResultAttempt;
+import lmsb.multiplication.domain.User;
+import lmsb.multiplication.repo.impl.MultiplicationRepoServiceImpl;
+import lmsb.multiplication.repo.impl.UserRepoServiceImpl;
+import lmsb.multiplication.service.MultiplicationService;
+import lmsb.multiplication.service.RandomGeneratorService;
+import lmsb.multiplication.service.impl.MultiplicationServiceImpl;
 
 
 public class MultiplicationServiceImplTest
@@ -29,7 +31,9 @@ public class MultiplicationServiceImplTest
       // With this call to initMocks we tell Mockito to
       // process the annotations
       MockitoAnnotations.initMocks(this);
-      this.m_multiplicationService = new MultiplicationServiceImpl(this.m_randomGeneratorService);
+      
+      //TODO: Mock other values as well. 
+//      this.m_multiplicationService = new MultiplicationServiceImpl(this.m);
    }
    
    @Test
@@ -53,9 +57,9 @@ public class MultiplicationServiceImplTest
    public void checkCorrectAttemptTest() 
    {
       // given
-      Multiplication multiplication = new Multiplication(50, 60);
-      User user = new User("john_doe");
-      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3000);
+      Multiplication multiplication = new Multiplication(50, 60, MultiplicationRepoServiceImpl.mulID);
+      User user = new User("john_doe", UserRepoServiceImpl.m_userID);
+      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3000, false);
       
       // when
       boolean attemptResult = m_multiplicationService.checkAttempt(attempt);
@@ -68,9 +72,9 @@ public class MultiplicationServiceImplTest
    public void checkWrongAttemptTest() 
    {
       // given
-      Multiplication multiplication = new Multiplication(50, 60);
-      User user = new User("john_doe");
-      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3010);
+      Multiplication multiplication = new Multiplication(50, 60, MultiplicationRepoServiceImpl.mulID);
+      User user = new User("john_doe", UserRepoServiceImpl.m_userID);
+      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3010, false);
       
       // when
       boolean attemptResult = this.m_multiplicationService.checkAttempt(attempt);

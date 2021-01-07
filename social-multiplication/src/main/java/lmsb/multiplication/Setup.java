@@ -1,10 +1,10 @@
-package microservices.book.multiplication;
+package lmsb.multiplication;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import microservices.book.multiplication.service.MultiplicationServiceImpl;
-import microservices.book.multiplication.service.RandomGeneratorServiceImpl;
+import lmsb.multiplication.service.impl.MultiplicationServiceImpl;
+import lmsb.multiplication.service.impl.RandomGeneratorServiceImpl;
 
 @Configuration
 public class Setup

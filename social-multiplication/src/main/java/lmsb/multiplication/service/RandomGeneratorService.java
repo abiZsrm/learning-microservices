@@ -1,4 +1,4 @@
-package microservices.book.multiplication.service;
+package lmsb.multiplication.service;
 
 public interface RandomGeneratorService
 {
