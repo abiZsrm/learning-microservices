@@ -1,0 +1,24 @@
+-- Create Database. 
+USE SocMulDB; 
+
+-- Multiplication table. 
+CREATE TABLE SCORE_CARD 
+(
+    CARD_ID INT NOT NULL, 
+    USER_ID INT NOT NULL, 
+    ATTEMPT_ID INT NOT NULL,
+    SCORE INT 
+    
+    PRIMARY KEY (CARD_ID)
+); 
+
+-- User table. 
+CREATE TABLE BADGE_CARD (
+    BADGE_ID INT NOT NULL, 
+    
+    PRIMARY KEY (BADGE_ID)
+); 
+
+    
+--- Static data values. 
+INSERT INTO STATIC_CONFIGURATION(CONFIGURATION_NAME, CONFIGURATION_VALUE) VALUES('SCORE_CARD_COUNT', 0)

@@ -1,0 +1,12 @@
+# Sub-directories to ignore. 
+.gradle/
+.settings/
+bin/
+gradle/
+
+# Files to ignore. 
+.classpath
+.project
+gradlew
+gradlew.bat
+
