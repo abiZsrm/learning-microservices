@@ -9,10 +9,12 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import gamification.domain.Leaderboard;
 import gamification.domain.ScoreCard;
 
+@Repository
 public class ScoreCardRepoImpl implements ScoreCardRepository
 {
    private NamedParameterJdbcTemplate m_namedJdbcTemplate; 
@@ -67,22 +69,23 @@ public class ScoreCardRepoImpl implements ScoreCardRepository
    @Override
    public int getTotalScoreForUser(int userId)
    {
-      // TODO Auto-generated method stub
-      return 0;
+      String totalScore = "SELECT SUM(SCORE) FROM SCORE_CARD WHERE USER_ID = ?";
+      return m_namedJdbcTemplate.getJdbcTemplate().queryForObject(totalScore, Integer.class, userId); 
    }
 
    @Override
    public List<Leaderboard> findFirst10()
    {
-      // TODO Auto-generated method stub
-      return null;
+      String findFirst10 = "SELECT SUM(SCORE) AS TOTAL_SCORE, USER_ID FROM SCORE_CARD GROUP BY (USER_ID)";
+      return m_namedJdbcTemplate.getJdbcTemplate().query(findFirst10, this::mapLb); 
    }
 
    @Override
    public List<ScoreCard> findByUserId(Long userId)
    {
-      // TODO Auto-generated method stub
-      return null;
+      String selectQueryForScoreCard = "SELECT * FROM SCORE_CARD WHERE USER_ID = ?";
+      
+      return m_namedJdbcTemplate.getJdbcTemplate().query(selectQueryForScoreCard, this::mapScoreCard); 
    }
    
    // Utility Methods // 
@@ -96,6 +99,13 @@ public class ScoreCardRepoImpl implements ScoreCardRepository
       return new ScoreCard(cardID, userID, attemptID, score);
    }
 
+   private Leaderboard mapLb(ResultSet rs, int rowNum) throws SQLException
+   {
+      long totalScore = rs.getInt("TOTAL_SCORE"); 
+      int userID = rs.getInt("USER_ID"); 
+      
+      return new Leaderboard(userID, totalScore); 
+   }
    private void updateID(int scoreCardID)
    {
       String updateQuery = "UPDATE STATIC_CONFIGURATION SET CONFIGURATION_VALUE = ? WHERE CONFIGURATION_NAME = 'SCORE_CARD_ID_COUNT'";
