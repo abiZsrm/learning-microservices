@@ -13,5 +13,5 @@ public interface ScoreCardRepository
    
    List<Leaderboard> findFirst10();
    
-   List<ScoreCard> findByUserId(final Long userId);
+   List<ScoreCard> findByUserId(final int userId);
 }

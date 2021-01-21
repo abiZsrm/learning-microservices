@@ -47,7 +47,7 @@ public class BadgeCardRepoImpl implements BadgeCardRepository
       insertSQL.append(" (:badge_id, :user_id, :badge) "); 
       
       HashMap<String, Object> sqlValues = new HashMap<String, Object>(); 
-      sqlValues.put("badge_id", badge.getBadgeId()); 
+      sqlValues.put("badge_id",  BadgeCardRepoImpl.badgeCardID); 
       sqlValues.put("user_id", badge.getUserId()); 
       sqlValues.put("badge", badge.getBadge().toString()); 
       

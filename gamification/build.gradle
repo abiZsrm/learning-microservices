@@ -19,9 +19,15 @@ dependencies
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
+	// Spring Dependencies. 
+    implementation('org.springframework.boot:spring-boot-starter-web')
+	
 	// Database Dependencies. 
     implementation('org.springframework.boot:spring-boot-starter-jdbc')
     implementation('com.microsoft.sqlserver:mssql-jdbc')
+    
+    // RABBITMMQ Dependencies. 
+    implementation('org.springframework.boot:spring-boot-starter-amqp')
 }
 
 test 

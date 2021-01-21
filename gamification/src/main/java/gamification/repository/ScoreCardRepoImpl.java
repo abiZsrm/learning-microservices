@@ -47,7 +47,7 @@ public class ScoreCardRepoImpl implements ScoreCardRepository
       insertSQL.append("(:card_id, :user_id, :attempt_id, :score) "); 
       
       HashMap<String, Integer> insertSQLValues = new HashMap<String, Integer>(); 
-      insertSQLValues.put("card_id", scoreCard.getCardId()); 
+      insertSQLValues.put("card_id", ScoreCardRepoImpl.scoreCardID); 
       insertSQLValues.put("user_id", scoreCard.getUserId()); 
       insertSQLValues.put("attempt_id", scoreCard.getAttemptId()); 
       insertSQLValues.put("score", scoreCard.getScore());
@@ -81,11 +81,11 @@ public class ScoreCardRepoImpl implements ScoreCardRepository
    }
 
    @Override
-   public List<ScoreCard> findByUserId(Long userId)
+   public List<ScoreCard> findByUserId(int userId)
    {
       String selectQueryForScoreCard = "SELECT * FROM SCORE_CARD WHERE USER_ID = ?";
       
-      return m_namedJdbcTemplate.getJdbcTemplate().query(selectQueryForScoreCard, this::mapScoreCard); 
+      return m_namedJdbcTemplate.getJdbcTemplate().query(selectQueryForScoreCard, this::mapScoreCard, userId); 
    }
    
    // Utility Methods // 
