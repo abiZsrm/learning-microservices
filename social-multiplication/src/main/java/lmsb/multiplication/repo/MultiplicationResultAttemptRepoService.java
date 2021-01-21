@@ -11,4 +11,6 @@ public interface MultiplicationResultAttemptRepoService
             throws SQLException;
    
    public void saveMultiplicationResultAttempt(MultiplicationResultAttempt attempt); 
+   
+   public MultiplicationResultAttempt findMRAById(int mraId); 
 }

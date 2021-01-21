@@ -9,9 +9,15 @@ import lmsb.multiplication.service.impl.RandomGeneratorServiceImpl;
 @Configuration
 public class StartUpConfiguration
 {
-   @Bean
-   public MultiplicationServiceImpl mulService()
-   {
-      return new MultiplicationServiceImpl(new RandomGeneratorServiceImpl()); 
-   }
+//   @Bean
+//   public MultiplicationServiceImpl mulService()
+//   {
+//      return new MultiplicationServiceImpl(new RandomGeneratorServiceImpl()); 
+//   }
+//   
+//   @Bean
+//   public RandomGeneratorServiceImpl randGenService()
+//   {
+//      return new RandomGeneratorServiceImpl(); 
+//   }
 }

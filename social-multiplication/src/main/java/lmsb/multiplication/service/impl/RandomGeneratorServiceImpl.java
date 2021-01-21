@@ -2,8 +2,11 @@ package lmsb.multiplication.service.impl;
 
 import java.util.Random;
 
+import org.springframework.stereotype.Service;
+
 import lmsb.multiplication.service.RandomGeneratorService;
 
+@Service
 public class RandomGeneratorServiceImpl implements RandomGeneratorService
 {
    final static int MINIMUM_FACTOR = 11;

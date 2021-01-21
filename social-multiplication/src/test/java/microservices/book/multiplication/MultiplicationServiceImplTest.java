@@ -52,34 +52,34 @@ public class MultiplicationServiceImplTest
       assertThat(multiplication.getOperand2()).isEqualTo(30);
       assertThat(multiplication.getResult()).isEqualTo(1500);
    }
-   
-   @Test
-   public void checkCorrectAttemptTest() 
-   {
-      // given
-      Multiplication multiplication = new Multiplication(50, 60, MultiplicationRepoServiceImpl.mulID);
-      User user = new User("john_doe", UserRepoServiceImpl.m_userID);
-      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3000, false);
-      
-      // when
-      boolean attemptResult = m_multiplicationService.checkAttempt(attempt);
-      
-      // assert
-      assertThat(attemptResult).isTrue();
-   }
-   
-   @Test
-   public void checkWrongAttemptTest() 
-   {
-      // given
-      Multiplication multiplication = new Multiplication(50, 60, MultiplicationRepoServiceImpl.mulID);
-      User user = new User("john_doe", UserRepoServiceImpl.m_userID);
-      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3010, false);
-      
-      // when
-      boolean attemptResult = this.m_multiplicationService.checkAttempt(attempt);
-      
-      // assert
-      assertThat(attemptResult).isFalse();
-   }
+//   
+//   @Test
+//   public void checkCorrectAttemptTest() 
+//   {
+//      // given
+//      Multiplication multiplication = new Multiplication(50, 60, MultiplicationRepoServiceImpl.mulID);
+//      User user = new User("john_doe", UserRepoServiceImpl.m_userID);
+//      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3000, false);
+//      
+//      // when
+//      boolean attemptResult = m_multiplicationService.checkAttempt(attempt);
+//      
+//      // assert
+//      assertThat(attemptResult).isTrue();
+//   }
+//   
+//   @Test
+//   public void checkWrongAttemptTest() 
+//   {
+//      // given
+//      Multiplication multiplication = new Multiplication(50, 60, MultiplicationRepoServiceImpl.mulID);
+//      User user = new User("john_doe", UserRepoServiceImpl.m_userID);
+//      MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(user, multiplication, 3010, false);
+//      
+//      // when
+//      boolean attemptResult = this.m_multiplicationService.checkAttempt(attempt);
+//      
+//      // assert
+//      assertThat(attemptResult).isFalse();
+//   }
 }

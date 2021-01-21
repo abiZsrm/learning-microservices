@@ -4,8 +4,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,9 @@ import lmsb.multiplication.service.MultiplicationService;
 public class MultiplicationResultAttemptController
 {
    private final MultiplicationService multiplicationService;
-   
+
    @Autowired
-   MultiplicationResultAttemptController( final MultiplicationService multiplicationService )
+   MultiplicationResultAttemptController( final MultiplicationService multiplicationService)
    {
       this.multiplicationService = multiplicationService;
    }
@@ -40,5 +42,13 @@ public class MultiplicationResultAttemptController
        return ResponseEntity.ok(
                multiplicationService.getStatsForUser(alias)
        );
+   }
+   
+   @GetMapping("/{resultId}")
+   ResponseEntity<MultiplicationResultAttempt> getResultById(@PathVariable("resultId") int resultId)
+   {
+      MultiplicationResultAttempt mra = multiplicationService.findMRAById(resultId); 
+      ResponseEntity<MultiplicationResultAttempt> response = new ResponseEntity<MultiplicationResultAttempt>(mra, HttpStatus.OK); 
+      return response; 
    }
 }

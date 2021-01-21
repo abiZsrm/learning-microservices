@@ -14,4 +14,6 @@ public interface MultiplicationService
             resultAttempt);
    
    List<MultiplicationResultAttempt> getStatsForUser(final String userAlias) throws SQLException;
+   
+   public MultiplicationResultAttempt findMRAById(int mraId); 
 }

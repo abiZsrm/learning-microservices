@@ -72,6 +72,13 @@ public class MultiplicationResultAttemptRepoServiceImpl implements Multiplicatio
       return m_namedJdbcTemplate.getJdbcTemplate().query(selectQuery.toString(), mapper, userAlias); 
    }
    
+   public MultiplicationResultAttempt findMRAById(int mraId)
+   {
+      String selectQuery = "SELECT * FROM MULTIPLICATION_RESULT_ATTEMPT WHERE ID = ?"; 
+      
+      return m_namedJdbcTemplate.getJdbcTemplate().queryForObject(selectQuery, this::mapRow, mraId); 
+   }
+   
    @Override
    public void saveMultiplicationResultAttempt(MultiplicationResultAttempt attempt)
    {
