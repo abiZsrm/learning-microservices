@@ -1,0 +1,7 @@
+1. How to access rabbitmq gui interface.
+https://stackoverflow.com/questions/23500014/rabbitmq-started-but-cant-access-management-interface
+
+Default username and password is 'guest'
+
+2. How to change tomcat port number. 
+https://stackoverflow.com/questions/18415578/how-to-change-tomcat-port-number

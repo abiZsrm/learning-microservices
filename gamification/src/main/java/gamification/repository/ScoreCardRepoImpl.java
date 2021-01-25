@@ -69,8 +69,8 @@ public class ScoreCardRepoImpl implements ScoreCardRepository
    @Override
    public int getTotalScoreForUser(int userId)
    {
-      String totalScore = "SELECT SUM(SCORE) FROM SCORE_CARD WHERE USER_ID = ?";
-      return m_namedJdbcTemplate.getJdbcTemplate().queryForObject(totalScore, Integer.class, userId); 
+      String totalScore = "SELECT SUM(SCORE) AS TOTAL_SCORE FROM SCORE_CARD WHERE USER_ID = ?";
+      return Integer.parseInt(m_namedJdbcTemplate.getJdbcTemplate().queryForObject(totalScore, String.class, userId)); 
    }
 
    @Override
