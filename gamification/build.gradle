@@ -14,6 +14,11 @@ repositories
 	mavenCentral()
 }
 
+ext 
+{
+    set('springCloudVersion', "2020.0.0")
+}
+
 dependencies 
 {
 	implementation 'org.springframework.boot:spring-boot-starter'
@@ -28,6 +33,21 @@ dependencies
     
     // RABBITMMQ Dependencies. 
     implementation('org.springframework.boot:spring-boot-starter-amqp')
+    
+    // Eureka Dependencies. 
+    implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
+    
+    // Spring Actuator. 
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+}
+
+// Spring Cloud Dependencies
+dependencyManagement 
+{
+    imports 
+    {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 test 

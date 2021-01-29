@@ -1,6 +1,8 @@
 1. How to access rabbitmq gui interface.
 https://stackoverflow.com/questions/23500014/rabbitmq-started-but-cant-access-management-interface
 
+http://localhost:15672/
+
 Default username and password is 'guest'
 
 2. How to change tomcat port number. 

@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.0-SNAPSHOT'
-	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'org.springframework.boot' version '2.4.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
 
@@ -14,11 +14,17 @@ repositories {
 	maven { url 'https://repo.spring.io/snapshot' }
 }
 
-dependencies {
+ext 
+{
+    set('springCloudVersion', "2020.0.0")
+}
+
+dependencies 
+{
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework:spring-webmvc'
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.0'
+	implementation 'com.fasterxml.jackson.core:2.12.0'
 	implementation("org.springframework.boot:spring-boot-starter-tomcat")
 	
 	// Database Dependencies. 
@@ -27,6 +33,21 @@ dependencies {
     
     // RABBITMMQ Dependencies. 
     implementation('org.springframework.boot:spring-boot-starter-amqp')
+    
+    // Eureka Dependencies. 
+    implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
+    
+    // Spring Actuator. 
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+}
+
+// Spring Cloud Dependencies
+dependencyManagement 
+{
+    imports 
+    {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 test {
